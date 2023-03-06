@@ -1,0 +1,15 @@
+{
+  "testFiles": "**/*.{feature,features}",
+  "baseUrl": "https://test-qa.ddiq.com/",
+  "env": {
+    "apiUrl": "https://test-qa.ddiq.com/ddiq-services/rest/admin/user/"
+  },
+  "proxy": true,
+  "defaultCommandTimeout": 60000,
+  "chromeWebSecurity": false,
+  "requestTimeout": 40000,
+  "numTestsKeptInMemory": 0,
+  "responseTimeout": 50000,
+  "pageLoadTimeout": 100000,
+  "projectId": "wwt5c8"
+}

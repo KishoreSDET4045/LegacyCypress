@@ -1,0 +1,39 @@
+{
+  "name": "e2e-automation-for-ddiq",
+  "version": "1.0.0",
+  "description": "setting up cypress tests for ddiq platform application",
+  "scripts": {
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "get-report": "ts-node ./utilities/getHtmlReport.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cypress/webpack-preprocessor": "^4.1.5",
+    "cucumber-html-reporter": "^5.4.0",
+    "cypress": "^9.4.1",
+    "cypress-cucumber-preprocessor": "latest",
+    "cypress-downloadfile": "^1.2.3",
+    "cypress-real-events": "^1.6.0",
+    "faker": "^6.6.6",
+    "multiple-cucumber-html-reporter": "^1.18.0",
+    "pdf-text-extract": "^1.5.0",
+    "ts-loader": "^5.3.1",
+    "ts-node": "^10.2.0",
+    "webpack": "^4.28.2"
+  },
+  "cypress-cucumber-preprocessor": {
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/screenshots/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "cypress-mailosaur": "^2.13.0",
+    "cypress-xpath": "^2.0.1"
+  }
+}

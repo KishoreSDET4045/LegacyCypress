@@ -1,0 +1,56 @@
+ pipeline {
+    agent any
+
+    stages {
+        stage("Enable Server") {
+            steps {
+                build job: 'enable-ddiq-for-e2e', parameters: [
+                    string(name: 'SERVER', value: 'cypress-e2e'), 
+                    string(name: 'DDIQ_Deployment', value: "$DDIQ_Deployment"), 
+                    string(name: 'DDIQ_IMAGE', value: "$DDIQ_IMAGE"), 
+                    string(name: 'DDIQ_IMAGE_TAG', value: "$DDIQ_IMAGE_TAG"), 
+                    string(name: 'Data_Dump', value: 'UI')
+                ]
+            }
+        }
+        stage('Checkout') {
+            steps {
+                git branch: "${BRANCH}", credentialsId: "${GIT_CREDS_ID}", url: "git@bitbucket.org:oiq/ddiq-cypress-framework.git"
+                sh 'cd $WORKSPACE'
+                sh 'git checkout ${REVISION}'
+            }
+        }
+        stage('Build') {
+             steps {
+                 sh 'docker build -t cypress-e2e-automation .'
+             }
+        }
+        stage('Run') {
+             steps {
+                 sh 'docker run --rm -v "$WORKSPACE"/report:/e2e/cypress/screenshots/ -v "$WORKSPACE"/report:/e2e/cypress/videos/ -v "$WORKSPACE"/report:/e2e/report/ cypress-e2e-automation ${SERVER} ${SLACK_CHANNEL}'
+             }
+        }
+    }
+
+    post {
+        success {
+            script {
+                if(params.NOTIFICATIONS_ENABLED) {
+                    slackSend channel: "#${SLACK_CHANNEL}", color: '#00FF00', message: "Cypress E2E Build Sanity Tests PASSED using - ${DDIQ_IMAGE}:${DDIQ_IMAGE_TAG} - ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                }
+            }
+        }
+        failure {
+            script {
+                if(params.NOTIFICATIONS_ENABLED) {
+                    slackSend channel: "#${SLACK_CHANNEL}", color: '#FF0000', message: "Cypress E2E Build Sanity Tests FAILED using - ${DDIQ_IMAGE}:${DDIQ_IMAGE_TAG} - ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                }
+            }
+        }
+        always {
+            archiveArtifacts artifacts:'report/**/*.*', fingerprint: true
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+            cleanWs()
+        }
+    }
+}
