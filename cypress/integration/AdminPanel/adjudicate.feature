@@ -2,8 +2,7 @@ Feature: Bulk adjudication by selecting mass hits to escalate
 
     @Regression
     Scenario: TC: Bulk adjudication by selecting mass hits to escalate 
-    Given User login to the application admin panel with user
-    When User is on admin panel
+    Given User login to the application with user
     Then User click on View Profiles
     Then User selects Regular-test
     Then User clicks on Find Profiles
