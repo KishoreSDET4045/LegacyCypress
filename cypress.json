@@ -1,8 +1,8 @@
 {
   "testFiles": "**/*.{feature,features}",
-  "baseUrl": "https://test-qa.ddiq.com/",
+  "baseUrl": "https://ui-regression-legacy-release.ddiq.com/",
   "env": {
-    "apiUrl": "https://test-qa.ddiq.com/ddiq-services/rest/admin/user/"
+    "apiUrl": "https://ui-regression-legacy-release.ddiq.com/ddiq-services/rest/admin/user/"
   },
   "proxy": true,
   "defaultCommandTimeout": 60000,

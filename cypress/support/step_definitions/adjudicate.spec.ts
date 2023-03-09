@@ -15,15 +15,15 @@ Then('User click on View Profiles', () => {
      adjudicate.viewProfile()
 })
 
-Then('User selects Regular-test', ()=>{
-     adjudicate.regularTest()
+Then('User selects DDIQ EDD', ()=>{
+     adjudicate.ddiqTest();
 })
 
 Then('User clicks on Find Profiles',()=>{
      adjudicate.findProfiles()
 })
 
-Then('User selecets first row user from results',()=>{
+Then('User selects first row user from results',()=>{
      adjudicate.firstUser()
 })
 
