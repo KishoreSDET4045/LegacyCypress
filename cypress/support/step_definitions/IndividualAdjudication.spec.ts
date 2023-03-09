@@ -1,21 +1,10 @@
-import { And, Then, When } from "cypress-cucumber-preprocessor/steps";
+import { Then, When } from "cypress-cucumber-preprocessor/steps";
+import AdjudicateMassEscalate from "../page_object/adjudicate.po";
 import IndividualAdjudication from "../page_object/IndividualAdjudication.po";
 
 const adjudication: IndividualAdjudication = new IndividualAdjudication();
-When('User login into application', () => {
-     adjudication.Login();
-  });
+const adjudicate: AdjudicateMassEscalate = new AdjudicateMassEscalate();
 
-Then('Click on View Profiles', () => {
-     adjudication.ViewProfile();
-});
-
-And('select Regular-test from Profile Type dropdown and click on Find Profiles', () => {
-     adjudication.useDropDown();
-});
- Then('seclect any company getting Profiles', () => {
-     adjudication.SelectProfile();
- });
  //Scenario
  When('If condition to verify confirm content check box', () => {
   adjudication.ConditionConfirm();
@@ -23,10 +12,10 @@ And('select Regular-test from Profile Type dropdown and click on Find Profiles',
 Then('click on adjudication side nav and select confirm contents', () => {
     adjudication.SelectNavForConfirm();
 })
-And('select one record for confirm contents', () => {
+Then('select one record for confirm contents', () => {
     adjudication.SelectRecord();
 })
-And('make assertion for Bulk adjudication header and number of records selected', () => {
+Then('make assertion for Bulk adjudication header and number of records selected', () => {
     adjudication.MakeAssertion();
 })
 Then('click on Adjudicate button', () => {
@@ -37,15 +26,15 @@ Then('click on Adjudicate button', () => {
 When('If condition to verify star content check box', () => {
   adjudication.ConditionStar();
 })
+
 Then('click on adjudication side nav and select star contents', () => {
    adjudication.SelectNavForStar();
 })
-And('select one record for star contents', () => {
+
+Then('select one record for star contents', () => {
   adjudication.SelectRecord();
 })
-And('make assertion for Bulk adjudication header and number of records selected', () => {
-  adjudication.MakeAssertion();
-})
+
 Then('click on Adjudicate button', () => {
   adjudication.ClickAdjudicate();
 })
@@ -55,12 +44,11 @@ Then('click on Adjudicate button', () => {
  Then('click on adjudication side nav and select comment contents', () => {
    adjudication.SelectNavForComment();
 })
-And('select one record for comment contents', () => {
+
+Then('select one record for comment contents', () => {
    adjudication.SelectRecord();
 })
-And('make assertion for Bulk adjudication header and number of records selected', () => {
-   adjudication.MakeAssertion();
-})
+
 Then('add comment and click on Adjudicate button', () => {
    adjudication.AddComment();
 })
@@ -74,12 +62,8 @@ Then('click on adjudication side nav and select remove contents', () => {
    adjudication.SelectNavForRemove();
 })
 
-And('select one record for remove contents', () => {
+Then('select one record for remove contents', () => {
   adjudication.SelectRecord();
-})
-
-And('make assertion for Bulk adjudication header and number of records selected', () => {
-  adjudication.MakeAssertion();
 })
 
 Then('add reagion and click on Adjudicate button', () => {

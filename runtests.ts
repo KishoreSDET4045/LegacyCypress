@@ -12,5 +12,5 @@ let CYPRESS_ARGS = {
 
 // setup base url from argv
 if (argv.server) {
-    CYPRESS_ARGS.config.baseUrl = `https://test-qa.ddiq.com/`
+    CYPRESS_ARGS.config.baseUrl = `https://ui-regression-legacy-release.ddiq.com/`
 }
